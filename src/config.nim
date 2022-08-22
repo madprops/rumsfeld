@@ -32,7 +32,7 @@ proc get_config*() =
     exclude = add_arg(name="exclude", kind="value", multiple=true, help="String to exclude", alt="e")
     case_insensitive = add_arg(name="case-insensitive", kind="flag", help="Perform a case insensitive search", alt="i")
 
-  add_header("Search content of files recursively")
+  add_header("Search file paths recursively")
   add_header(&"Version: {version}")
   add_note("Git Repo: https://github.com/madprops/rumsfeld")
   parse_args()

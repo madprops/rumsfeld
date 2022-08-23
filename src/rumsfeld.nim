@@ -38,15 +38,17 @@ proc get_results(query: string): seq[Result] =
       block on_path:
         for e in conf().exclude:
           if path.contains(e): break on_path
+        
+        let parts = path.split("/")
 
-        for c in path.split("/"):
+        for c in parts:
           if not valid_component(c): break on_path          
         
         if conf().case_insensitive:
-          if not path.tolower.contains(low_query):
+          if not parts[^1].tolower.contains(low_query):
             break on_path
         else:
-          if not path.contains(query):
+          if not parts[^1].contains(query):
             break on_path
 
         let full_path = joinPath(conf().path, path)

@@ -28,7 +28,7 @@ proc valid_component(c: string): bool =
   c == "node_modules"
   return not not_valid
 
-# Find files recursively and check text
+# Find files recursively and check path
 proc get_results(query: string): seq[Result] =
   let low_query = query.tolower
   var results: seq[Result]

@@ -9,10 +9,6 @@ let underscore = ansiStyleCode(styleUnderscore)
 let bold = ansiStyleCode(styleBright)
 let reset = ansiResetCode
 
-let
-  # Stop if many results
-  max_results = 100
-
 type
   # Object for results
   Result = object
@@ -54,7 +50,7 @@ proc get_results(query: string): seq[Result] =
         let full_path = joinPath(conf().path, path)
         let p = if conf().absolute: full_path else: path
         results.add(Result(path: p))
-        if results.len >= max_results: break dirwalk
+        if results.len >= conf().max_results: break dirwalk
   
   return results
 

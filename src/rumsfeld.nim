@@ -60,7 +60,7 @@ proc get_results(query: string): seq[Result] =
 
 # Print the results
 proc print_results(results: seq[Result], duration: float) =
-  let format = not conf().is_piped and not conf().clean
+  let format = not conf().piped and not conf().clean
   let result_width = terminalWidth() + yellow.len + reset.len - 2
   var counter = 0
 

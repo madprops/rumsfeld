@@ -21,7 +21,7 @@ type Config* = ref object
   absolute*: bool
   exclude*: seq[string]
   case_insensitive*: bool
-  is_piped*: bool
+  piped*: bool
   clean*: bool
 
 var oconf*: Config
@@ -47,7 +47,7 @@ proc get_config*() =
     exclude: exclude.values,
     case_insensitive: case_insensitive.used,
     clean: clean.used,
-    is_piped: not isatty(stdout)
+    piped: not isatty(stdout)
   )
 
 proc conf*(): Config =

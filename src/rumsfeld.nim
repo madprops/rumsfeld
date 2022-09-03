@@ -60,19 +60,25 @@ proc get_results(query: string): seq[Result] =
 
 # Print the results
 proc print_results(results: seq[Result], duration: float) =
+  let format = not conf().is_piped and not conf().clean
   let result_width = terminalWidth() + yellow.len + reset.len - 2
   var counter = 0
 
-  echo ""
+  if format:
+    echo ""
 
   for r in results:
-    echo &"{bold}{green}{r.path}{reset}"
+    if format:
+      echo &"{bold}{green}{r.path}{reset}"
+    else:
+      echo r.path
 
   let
     rs = result_string(results.len)
     d = duration.formatFloat(ffDecimal, 2)
-    
-  echo &"\n{blue}Found {results.len} {rs} in {d} ms{reset}\n"  
+  
+  if format:
+    echo &"\n{blue}Found {results.len} {rs} in {d} ms{reset}\n"  
 
 # Main function
 proc main() =
